@@ -15,16 +15,16 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
   const { player, score } = req.body;
-  console.log(`Saving high score for ${player}: ${score}`);
   if (!player || !score) {
     return res.status(400).json({ error: 'Player and score are required' });
   }
   try {
+    console.log(`Saving high score for ${player}: ${score}`);
     const [result] = await pool.promise().query(
       'INSERT INTO hiscores (player, score) VALUES (?, ?)',
       [player, score]
     );
-
+    
     if (result.affectedRows === 0) {
       return res.status(400).json({ error: 'Failed to save score' });
     }

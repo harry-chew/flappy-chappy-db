@@ -7,6 +7,9 @@ app.use(express.json());
 
 app.use('/hiscores', hiscores);
 
+app.get('/', (req, res) => {
+  res.send('Welcome to the High Scores API');
+});
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

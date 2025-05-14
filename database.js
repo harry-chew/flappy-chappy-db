@@ -2,6 +2,7 @@ const mysql = require('mysql2');
 require('dotenv').config();
 
 const isProduction = process.env.NODE_ENV === 'production';
+
 const DB_HOST = isProduction ? process.env.DB_HOST : process.env.DEV_DB_HOST;
 const DB_USER = isProduction ? process.env.DB_USER : process.env.DEV_DB_USER;
 const DB_PASS = isProduction ? process.env.DB_PASS : process.env.DEV_DB_PASS;
