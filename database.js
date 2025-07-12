@@ -1,12 +1,16 @@
 const mysql = require('mysql2');
 require('dotenv').config();
 
+//process.env.NODE_ENV = 'production'; // Set to 'production' or 'development' as needed
+
 const isProduction = process.env.NODE_ENV === 'production';
 
 const DB_HOST = isProduction ? process.env.DB_HOST : process.env.DEV_DB_HOST;
 const DB_USER = isProduction ? process.env.DB_USER : process.env.DEV_DB_USER;
 const DB_PASS = isProduction ? process.env.DB_PASS : process.env.DEV_DB_PASS;
 const DB_NAME = isProduction ? process.env.DB_NAME : process.env.DEV_DB_NAME;
+
+console.log("isProduction:", isProduction);
 
 // Check if all required environment variables are set
 if (!DB_HOST || !DB_USER || !DB_PASS || !DB_NAME) {
@@ -36,6 +40,7 @@ pool.getConnection((err, connection) => {
     process.exit(1);
   }
   console.log('Successfully connected to the database.');
+  console.log(DB_HOST, DB_USER, DB_NAME);
   connection.release();
 });
 
